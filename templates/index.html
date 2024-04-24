@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockchain API</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <button id="mine">Mine</button>
+
+    <h2>New Chat</h2>
+    <input type="text" id="sender" placeholder="Enter sender">
+    <input type="text" id="recipient" placeholder="Enter recipient">
+    <input type="text" id="category" placeholder="Enter category">
+    <input type="text" id="text" placeholder="Enter text">
+    <button id="new_transaction">New Chat</button>
+
+    <button id="full_chain">Full Chain</button>
+
+    <h2>Register Nodes</h2>
+    <input type="text" id="nodes" placeholder="Enter new nodes">
+    <button id="register_nodes">Register Nodes</button>
+
+    <button id="consensus">Consensus</button>
+
+    <div id="response"></div>
+
+    <script>
+        function callAPI(api, method, data) {
+            $.ajax({
+                url: 'http://127.0.0.1:5000/' + api,
+                type: method,
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function(response) {
+                    $('#response').html(JSON.stringify(response));
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                }
+            });
+        }
+
+        $('#mine').click(function() { callAPI('mine', 'GET'); });
+
+        $('#new_transaction').click(function() {
+            var sender = $('#sender').val();
+            var recipient = $('#recipient').val();
+            var category = $('#category').val();
+            var text = $('#text').val();
+            callAPI('transactions/new', 'POST', { sender: sender, recipient: recipient, category: category, text: text});
+
+            // Clear input fields after submission
+            $('#sender').val('');
+            $('#recipient').val('');
+            $('#category').val('');
+            $('#text').val('');
+        });
+
+        $('#full_chain').click(function() { callAPI('chain', 'GET'); });
+
+        $('#register_nodes').click(function() {
+            var nodes = $('#nodes').val().split(',');
+            callAPI('nodes/register', 'POST', { nodes: nodes });
+
+            // Clear input field after submission
+            $('#nodes').val('');
+        });
+
+        $('#consensus').click(function() { callAPI('nodes/resolve', 'GET'); });
+    </script>
+</body>
+</html>
