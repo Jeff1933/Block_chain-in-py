@@ -17,14 +17,16 @@
 
 1.输出表格
 
-![image](images/frame.png)
+<img width="229" alt="frame" src="https://github.com/Jeff1933/Daily_News_IN_WEB3/assets/130274608/e725ada7-d30d-49c1-b376-fe42e9cbe7a0">
 
 2.按类别计数的条形图
 
-![image](images/2.png)
+<img width="452" alt="bar chart" src="https://github.com/Jeff1933/Daily_News_IN_WEB3/assets/130274608/4ed640e6-e297-4c03-b4db-e8dd80718007">
+
 
 3.按类别分类的话题
 
-![image](images/3.png)
+<img width="272" alt="Group by" src="https://github.com/Jeff1933/Daily_News_IN_WEB3/assets/130274608/341e3531-060d-4925-b0c6-e026029a2edc">
+
 
 [Learn from](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)
