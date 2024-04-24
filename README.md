@@ -17,14 +17,14 @@
 
 1.输出表格
 
-![image](https://github.com/Jeff1933/Daily_News_IN_WEB3/blob/main/images/frame.png)
+![image](images/frame.png)
 
 2.按类别计数的条形图
 
-![image](https://github.com/Jeff1933/Daily_News_IN_WEB3/blob/main/images/2.png)
+![image](images/2.png)
 
 3.按类别分类的话题
 
-![image](https://github.com/Jeff1933/Daily_News_IN_WEB3/blob/main/images/3.png)
+![image](images/3.png)
 
 [Learn from](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)
