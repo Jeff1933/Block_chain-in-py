@@ -12,6 +12,9 @@
 
 5.返回链
 
+这是链主要的结构
+<img width="392" alt="chain" src="https://github.com/Jeff1933/Daily_News_IN_WEB3/assets/130274608/d1f492bb-b56f-4c3f-abe1-a979bad5d5ad">
+
 ## ETL(可视化功能)
 通过streamlit搭建关于话题区块链的数据可视化程序
 
@@ -28,5 +31,5 @@
 
 <img width="272" alt="Group by" src="https://github.com/Jeff1933/Daily_News_IN_WEB3/assets/130274608/341e3531-060d-4925-b0c6-e026029a2edc">
 
-
+## 学习
 [Learn from](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)
