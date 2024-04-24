@@ -16,8 +16,10 @@
 
 <img width="392" alt="chain" src="https://github.com/Jeff1933/Daily_News_IN_WEB3/assets/130274608/d1f492bb-b56f-4c3f-abe1-a979bad5d5ad">
 
+6.前端页面，用按钮实现上面功能
+
 ## ETL(可视化功能)
-通过streamlit搭建关于话题区块链的数据可视化程序
+通过streamlit搭建关于话题区块链的数据可视化程序,首先要运行区块链代码，然后才能用ETL获取chain
 
 1.输出表格
 
