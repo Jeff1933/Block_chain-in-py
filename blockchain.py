@@ -4,7 +4,7 @@ from textwrap import dedent
 from time import time
 from uuid import uuid4
 from urllib.parse import urlparse
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import requests
 
 class Blockchain(object):
@@ -109,7 +109,7 @@ class Blockchain(object):
         self.chain.append(block)
         return block
 
-    def new_transaction(self, sender, recipient, amount):
+    def new_transaction(self, sender, recipient, category, text):
         # 将新的交易添加到交易列表中
         """
         创建一个新的交易以便放入下一个挖掘的区块中
@@ -122,7 +122,8 @@ class Blockchain(object):
         self.current_transactions.append({
             'sender': sender,
             'recipient': recipient,
-            'amount': amount,
+            'category': category,
+            'text': text,
         })
         
         return self.last_block['index'] + 1
@@ -183,6 +184,9 @@ node_identifier = str(uuid4()).replace('-', '')
 # 实例化区块链
 blockchain = Blockchain()
 
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/mine', methods=['GET'])
 def mine():
@@ -196,7 +200,8 @@ def mine():
     blockchain.new_transaction(
         sender="0",
         recipient=node_identifier,
-        amount=1,
+        category='WEB3',
+        text='Talk what you want'
     )
 
     # 通过将其添加到链中来创建新的区块
@@ -217,12 +222,12 @@ def new_transaction():
     values = request.get_json()
 
     # 检查POST数据中是否包含所需的字段
-    required = ['sender', 'recipient', 'amount']
+    required = ['sender', 'recipient', 'category', 'text']
     if not all(k in values for k in required):
         return '缺少字段', 400
 
     # 创建一个新的交易
-    index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
+    index = blockchain.new_transaction(values['sender'], values['recipient'], values['category'], values['text'])
 
     response = {'message': f'交易将被添加到区块 {index}'}
     return jsonify(response), 201
@@ -272,11 +277,3 @@ def consensus():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
-# 工作量证明算法
-""" from hashlib import sha256
-x = 5
-y = 0  # 我们还不知道y应该是多少...
-while sha256(f'{x*y}'.encode()).hexdigest()[-1] != "0":
-    y += 1
-print(f'解为 y = {y}') """
