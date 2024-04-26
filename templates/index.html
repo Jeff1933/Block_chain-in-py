@@ -1,30 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Blockchain API</title>
+    <marquee bgcolor="orange">POST ANYTHING</marquee>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        /* 隐藏输入框 */
+        .input-group {
+            display: none;
+        }
+        /* 美化按钮 */
+        button {
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #4CAF50; /* 添加背景颜色 */
+            color: white; /* 修改文字颜色为白色 */
+        }
+        /* 美化输出 */
+        #response {
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        /* 亮暗模式 */
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        /* 在暗色模式下改变输出内容的颜色 */
+        .dark-mode #response {
+            color: #fff;
+        }
+        /* 添加背景图片 */
+        body {
+            background-image: url('pic2.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: right;
+        }
+    </style>
 </head>
-<body>
-    <button id="mine">Mine</button>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- 添加一个按钮来显示输入框 -->
+                <button id="toggle-input" onclick="toggleInput()" class="btn btn-primary mb-3">Show Input</button>
+                <!-- 添加一个按钮来切换亮暗模式 -->
+                <button onclick="toggleDarkMode()" class="btn btn-primary mb-3">Toggle Dark Mode</button>
 
-    <h2>New Chat</h2>
-    <input type="text" id="sender" placeholder="Enter sender">
-    <input type="text" id="recipient" placeholder="Enter recipient">
-    <input type="text" id="category" placeholder="Enter category">
-    <input type="text" id="text" placeholder="Enter text">
-    <button id="new_transaction">New Chat</button>
+                <h2>Mine</h2>
+                <button id="mine" class="btn btn-primary mb-3">Mine</button>
 
-    <button id="full_chain">Full Chain</button>
+                <h2>New Chat</h2>
+                <div class="input-group mb-3">
+                    <input type="password" id="sender" class="form-control" placeholder="Enter sender">
+                    <input type="password" id="recipient" class="form-control" placeholder="Enter recipient">
+                    <input type="text" id="category" class="form-control" placeholder="Enter category">
+                    <input type="text" id="text" class="form-control" placeholder="Enter text">
+                    <div class="input-group-append">
+                        <button id="new_transaction" class="btn btn-success">New Chat</button>
+                    </div>
+                </div>
 
-    <h2>Register Nodes</h2>
-    <input type="text" id="nodes" placeholder="Enter new nodes">
-    <button id="register_nodes">Register Nodes</button>
+                <h2>Show Full Chain</h2>
+                <button id="full_chain" class="btn btn-info mb-3">Full Chain</button>
 
-    <button id="consensus">Consensus</button>
+                <h2>Register Nodes</h2>
+                <div class="input-group mb-3">
+                    <input type="text" id="nodes" class="form-control" placeholder="Enter new nodes">
+                    <div class="input-group-append">
+                        <button id="register_nodes" class="btn btn-warning">Register Nodes</button>
+                    </div>
+                </div>
 
-    <div id="response"></div>
+                <h2>Consensus</h2>
+                <button id="consensus" class="btn btn-danger mb-3">Consensus</button>
+            </div>
+            <div class="col-md-6">
+                <h2>Response</h2>
+                <pre id="response" class="border p-3 bg-white"></pre>
+            </div>
+        </div>
+    </div>
 
     <script>
+        function toggleInput() {
+            // 切换输入框的显示状态
+            $('.input-group').toggle();
+            // 切换按钮的文本
+            $('#toggle-input').text($('.input-group').is(':visible') ? 'Hide Input' : 'Show Input');
+        }
+        function toggleDarkMode() {
+            // 切换亮暗模式
+            $('body').toggleClass('dark-mode');
+        }
+        // 其他代码...
         function callAPI(api, method, data) {
             $.ajax({
                 url: 'http://127.0.0.1:5000/' + api,
