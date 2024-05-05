@@ -1,0 +1,53 @@
+body {
+    color: white;
+    /* background-color: rgb(55, 192, 202); */
+}
+
+.bjimg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    object-fit: cover;
+}
+
+/* 隐藏输入框 */
+.input-group {
+    display: none;
+}
+/* 美化按钮 */
+button {
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #4CAF50; /* 添加背景颜色 */
+    color: white; /* 修改文字颜色为白色 */
+}
+/* 美化输出 */
+#response {
+    border: 1px solid #ccc; 
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    white-space: pre-wrap; /* 保持空白符并允许自动换行 */
+}
+/* 亮暗模式 */
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+/* 在暗色模式下改变输出内容的颜色 */
+.dark-mode #response {
+    color: #fff;
+}
+/* 添加背景图片 
+body {
+    background-image: url('pic2.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+} */
