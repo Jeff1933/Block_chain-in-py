@@ -5,46 +5,9 @@
     <title>Blockchain API</title>
     <marquee bgcolor="orange">POST ANYTHING</marquee>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <video src="static\beijing.mp4" class="bjimg" autoplay loop muted></video>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <style>
-        /* 隐藏输入框 */
-        .input-group {
-            display: none;
-        }
-        /* 美化按钮 */
-        button {
-            border: none;
-            padding: 10px 20px;
-            margin: 10px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-            background-color: #4CAF50; /* 添加背景颜色 */
-            color: white; /* 修改文字颜色为白色 */
-        }
-        /* 美化输出 */
-        #response {
-            border: 1px solid #ccc;
-            padding: 10px;
-            font-size: 16px;
-            color: #333;
-        }
-        /* 亮暗模式 */
-        .dark-mode {
-            background-color: #333;
-            color: #fff;
-        }
-        /* 在暗色模式下改变输出内容的颜色 */
-        .dark-mode #response {
-            color: #fff;
-        }
-        /* 添加背景图片 */
-        body {
-            background-image: url('pic2.png');
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: right;
-        }
-    </style>
 </head>
 <body class="bg-light">
     <div class="container py-5">
@@ -53,10 +16,12 @@
                 <!-- 添加一个按钮来显示输入框 -->
                 <button id="toggle-input" onclick="toggleInput()" class="btn btn-primary mb-3">Show Input</button>
                 <!-- 添加一个按钮来切换亮暗模式 -->
-                <button onclick="toggleDarkMode()" class="btn btn-primary mb-3">Toggle Dark Mode</button>
+                <!-- <button onclick="toggleDarkMode()" class="btn btn-primary mb-3">Toggle Dark Mode</button> -->
 
-                <h2>Mine</h2>
-                <button id="mine" class="btn btn-primary mb-3">Mine</button>
+                <div style="display: flex;">
+                    <h2>Mine</h2>
+                    <button id="mine" class="btn btn-primary mb-3">Mine</button>
+                </div>
 
                 <h2>New Chat</h2>
                 <div class="input-group mb-3">
@@ -68,10 +33,14 @@
                         <button id="new_transaction" class="btn btn-success">New Chat</button>
                     </div>
                 </div>
+                
 
-                <h2>Show Full Chain</h2>
-                <button id="full_chain" class="btn btn-info mb-3">Full Chain</button>
+                <div style="display: flex;">
+                    <h2>Show Full Chain</h2>
+                    <button id="full_chain" class="btn btn-info mb-3">Full Chain</button>
+                </div>
 
+        
                 <h2>Register Nodes</h2>
                 <div class="input-group mb-3">
                     <input type="text" id="nodes" class="form-control" placeholder="Enter new nodes">
@@ -79,9 +48,12 @@
                         <button id="register_nodes" class="btn btn-warning">Register Nodes</button>
                     </div>
                 </div>
+                
 
-                <h2>Consensus</h2>
-                <button id="consensus" class="btn btn-danger mb-3">Consensus</button>
+                <div style="display: flex;">
+                    <h2>Consensus</h2>
+                    <button id="consensus" class="btn btn-danger mb-3">Consensus</button>
+                </div>
             </div>
             <div class="col-md-6">
                 <h2>Response</h2>
@@ -97,10 +69,10 @@
             // 切换按钮的文本
             $('#toggle-input').text($('.input-group').is(':visible') ? 'Hide Input' : 'Show Input');
         }
-        function toggleDarkMode() {
+        /* function toggleDarkMode() {
             // 切换亮暗模式
             $('body').toggleClass('dark-mode');
-        }
+        } */
         // 其他代码...
         function callAPI(api, method, data) {
             $.ajax({
@@ -109,7 +81,7 @@
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 success: function(response) {
-                    $('#response').html(JSON.stringify(response));
+                    $('#response').html('<pre>' + JSON.stringify(response, null, 4) + '</pre>');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error(textStatus, errorThrown);
